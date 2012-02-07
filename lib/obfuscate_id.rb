@@ -1,16 +1,17 @@
 module ObfuscateId
 
   def obfuscate_id
+    require 'obfuscate_id/scatter_swap'
     extend ClassMethods 
     include InstanceMethods
   end
 
   def self.hide(id)
-    id.to_i + 100
+    ScatterSwap.hash(id)
   end
 
   def self.show(id)
-    id.to_i - 100
+    ScatterSwap.reverse_hash id
   end
 
   module ClassMethods
