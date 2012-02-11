@@ -66,7 +66,23 @@ def visualize_scatter
   end
 end
 
-visualize_hash
+
+# find hash for lots of spins
+def visualize_spin
+  2000.times do |original|
+    hashed_values = []
+    9000000000.times do |spin|
+      hashed =  ScatterSwap.hash(original, spin)
+      if hashed_values.include? hashed
+        puts "collision: #{original} - #{spin} - #{hashed}"
+        break
+      end
+      hashed_values.push hashed
+    end
+  end
+end
+visualize_spin
+#visualize_hash
 #visualize_scatter_and_unscatter
 #visualize_scatter
-
+#visualize_swapper_map

@@ -46,18 +46,16 @@ class ScatterSwap
   # for each place in the 10 digit array; for this, we need a map so that we
   # can reverse it.
 
-  def self.key
-    4703975614
-  end
-
   # obfuscates an integer up to 10 digits in length
-  def self.hash(original_integer)
+  def self.hash(original_integer, spin = 0)
+    @spin = spin
     original = arrayify(original_integer)
     hashed = scatter(swap(original)) 
     hashed.join
   end
 
-  def self.reverse_hash(hashed_integer)
+  def self.reverse_hash(hashed_integer, spin = 0)
+    @spin = spin
     hashed = arrayify(hashed_integer)
     original = unswap(unscatter(hashed))
     original.join
@@ -79,7 +77,7 @@ class ScatterSwap
   def self.swapper_map(index)
     array = (0..9).to_a
     10.times.collect.with_index do |i|
-      array.rotate!(index + i + key).pop
+      array.rotate!(index + i ^ spin).pop
     end
   end
 
@@ -89,7 +87,7 @@ class ScatterSwap
   def self.scatter(array)
     sum_of_digits = array.inject(:+).to_i
     10.times.collect do 
-      array.rotate!(sum_of_digits).pop
+      array.rotate!(spin ^ sum_of_digits).pop
     end
   end
 
@@ -97,7 +95,7 @@ class ScatterSwap
     sum_of_digits = array.inject(:+).to_i
     [].tap do |original|
       10.times do
-        original.push(array.pop).rotate!(sum_of_digits * -1)
+        original.push(array.pop).rotate!((sum_of_digits ^ spin)* -1)
       end
     end
   end
@@ -108,6 +106,9 @@ class ScatterSwap
     integer.to_s.rjust(10, '0').split("").collect {|d| d.to_i}
   end
    
+  def self.spin
+    @spin || 0
+  end
 
 
 
