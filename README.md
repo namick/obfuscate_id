@@ -28,8 +28,9 @@ ObfuscateId turns your sequential Active Record ids into non-sequential, random 
 ## Features
 
 * Extreemly simple. A single line of code in the model turns it on.
+* Transforms normal seqential ids into random-looking ten digit numerical strings.
+* Gently masks resource ids while retaining a cleaner look than using an encrypted hash.
 * No migrations or database changes are needed.  The record is still stored in the database with its original id.
-* Creates a random looking integer which hides the id but still looks cleaner than a using an encrypted hash.
 * Fast, no heavy calculation.
 
 
