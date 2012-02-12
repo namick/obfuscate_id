@@ -24,8 +24,9 @@ end
 describe "#swapper_map" do
   before do
     @map_set = []
+    s = ScatterSwap.new(1)
     10.times do |digit|
-      @map_set.push ScatterSwap.swapper_map(digit)
+      @map_set.push s.swapper_map(digit)
     end
   end
 
@@ -45,15 +46,19 @@ end
 describe "#scatter" do
   it "should return a number different from original" do
     100.times do |integer|
-      array = ScatterSwap.arrayify(integer)
-      ScatterSwap.scatter(array).should_not == integer
+      s = ScatterSwap.new(integer)
+      original_array = s.working_array
+      s.scatter
+      s.working_array.should_not == original_array
     end
   end
   it "should be reversable" do
     100.times do |integer|
-      original = ScatterSwap.arrayify(integer)
-      scattered = ScatterSwap.scatter(original.clone)
-      ScatterSwap.unscatter(scattered).should == original
+      s = ScatterSwap.new(integer)
+      original_array = s.working_array.clone
+      s.scatter
+      s.unscatter
+      s.working_array.should == original_array
     end
   end
 end
@@ -61,15 +66,19 @@ end
 describe "#swap" do
   it "should be different from original" do
     100.times do |integer|
-      original = ScatterSwap.arrayify(integer)
-      ScatterSwap.swap(original.clone).should_not == original
+      s = ScatterSwap.new(integer)
+      original_array = s.working_array.clone
+      s.swap
+      s.working_array.should_not == original_array
     end
   end
   it "should be reversable" do
     100.times do |integer|
-      original = ScatterSwap.arrayify(integer)
-      swapped = ScatterSwap.swap(original.clone)
-      ScatterSwap.unswap(swapped.clone).should == original
+      s = ScatterSwap.new(integer)
+      original_array = s.working_array.clone
+      s.swap
+      s.unswap
+      s.working_array.should == original_array
     end
   end
 end  
