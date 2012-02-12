@@ -12,7 +12,7 @@ into something like:
 
     http://example.com/users/2356513904
     
-ObfuscateId mixes up the ids in a simple, reversable hashing algorithm so that it can then automatically revert the hashed number back to 3 for record lookup without having to store a hash or tag in the database.  No migrations needed.
+ObfuscateId mixes up the ids in a simple, reversable hashing algorithm so that it can then automatically revert the hashed number back to the original id for record lookup without having to store a hash or tag in the database.  No migrations needed.
 
 If you have the opposite problem, and your site is scaling well, you might not want to leak that you are getting 50 new posts a minute.
 
