@@ -39,7 +39,7 @@ Add the gem to your Gemfile.
 
     gem "obfuscate_id"
 
-Run bundler
+Run bundler.
 
     bundle install
 
@@ -51,9 +51,26 @@ Then, in your model, add a single line.
 
 ## Customization
 
-If you want your obfuscated ids to be different than some other website using the same plugin, you can throw a random number (spin) at obfuscate_id to make it hash out unique ids.
+If you want your obfuscated ids to be different than some other website using the same plugin, you can throw a random number (spin) at obfuscate_id to make it hash out unique ids for your app.
 
     class Post < ActiveRecord::Base
       obfuscate_id :spin => 89238723
     end
+
+This is also useful for making different models in the same app have different obfuscated ids.
+
+## How it works
+
+ObfuscateId pairs each number, from 0 to 9999999999, with one and only one number in that same range.  That other number is paired back to the first.  This is an example of a minimal perfect hash function.   Within a set of one Billion numbers, it simply maps every number to a different 10 digit number, and back again.
+
+ObfuscateId switches the plain record id to the obfuscated id in the models `to_param` method.
+
+It then augments Active Record's `find` method on models that have have been initiated with the `obfuscate_id` method to quickly reverse this obfuscated id back to the plain id before building the database query. This means no migrations or changes to the database.
+
+## Limitations
+
+* This is not security.  ObfuscateId was created to lightly mask record id numbers for the casual user.  If you need to really secure your database ids (hint, you probably don't), you need to use real encryption like AES.
+* Works for up to a Billion database records.  ObfuscateId simply maps every integer below one Billion to some other number below one Billion.
+* To properly generate obfuscated urls, make sure you trigger the model's `to_param` method by passing in the whole object rather than just the id like this: `post_path(@post)` rather than `post_path(@post.id)`.
+* Rails uses the real id rather than `to_param` in some places.  A simple view-source on a form will often show the real id although this can be avoided by taking certain precautions. 
 
