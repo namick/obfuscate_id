@@ -73,5 +73,5 @@ It then augments Active Record's `find` method on models that have have been ini
 * This is not security.  ObfuscateId was created to lightly mask record id numbers for the casual user.  If you need to really secure your database ids (hint, you probably don't), you need to use real encryption like AES.
 * Works for up to a Billion database records.  ObfuscateId simply maps every integer below one Billion to some other number below one Billion.
 * To properly generate obfuscated urls, make sure you trigger the model's `to_param` method by passing in the whole object rather than just the id; do this: `post_path(@post)` not this: `post_path(@post.id)`.
-* Rails uses the real id rather than `to_param` in some places.  A simple view-source on a form will often show the real id although this can be avoided by taking certain precautions. 
+* Rails uses the real id rather than `to_param` in some places.  A simple view-source on a form will often show the real id. This can be avoided by taking certain precautions. 
 
