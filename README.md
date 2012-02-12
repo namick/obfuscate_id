@@ -43,10 +43,6 @@ Run bundler
 
     bundle install
 
-Generate the initilizer file
-
-    rails generate obfuscate_id:install
-
 Then, in your model, add a single line.  
 
     class Post < ActiveRecord::Base
