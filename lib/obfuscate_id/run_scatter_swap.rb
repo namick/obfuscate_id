@@ -1,10 +1,14 @@
 require './scatter_swap.rb'
 
+# This file isn't really part of the library, its pretty much spike code.. 
+# 
 # While developing this, I used this file to visualize what was going on with the numbers
 #
-# you can run it like this:
+# You can uncomment various methods at the bottom and then run it like this:
 #
 # watch -n1 ruby run_scatter_swap.rb
+# 
+# tweak the code a bit and see instant visual changes in the generated numbers
 
 def visualize_scatter_and_unscatter
   # change this number to experiment with different values
@@ -81,7 +85,8 @@ def visualize_spin
     end
   end
 end
-visualize_spin
+
+#visualize_spin
 #visualize_hash
 #visualize_scatter_and_unscatter
 #visualize_scatter

@@ -62,7 +62,7 @@ This is also useful for making different models in the same app have different o
 
 ## How it works
 
-ObfuscateId pairs each number, from 0 to 9999999999, with one and only one number in that same range.  That other number is paired back to the first.  This is an example of a minimal perfect hash function.   Within a set of one Billion numbers, it simply maps every number to a different 10 digit number, and back again.
+ObfuscateId pairs each number, from 0 to 9999999999, with one and only one number in that same range.  That other number is paired back to the first.  This is an example of a minimal perfect hash function.   Within a set of ten billion numbers, it simply maps every number to a different 10 digit number, and back again.
 
 ObfuscateId switches the plain record id to the obfuscated id in the models `to_param` method.
 
@@ -71,7 +71,7 @@ It then augments Active Record's `find` method on models that have have been ini
 ## Limitations
 
 * This is not security.  ObfuscateId was created to lightly mask record id numbers for the casual user.  If you need to really secure your database ids (hint, you probably don't), you need to use real encryption like AES.
-* Works for up to a Billion database records.  ObfuscateId simply maps every integer below one Billion to some other number below one Billion.
+* Works for up to ten billion database records.  ObfuscateId simply maps every integer below ten billion to some other number below ten billion.
 * To properly generate obfuscated urls, make sure you trigger the model's `to_param` method by passing in the whole object rather than just the id; do this: `post_path(@post)` not this: `post_path(@post.id)`.
 * Rails uses the real id rather than `to_param` in some places.  A simple view-source on a form will often show the real id. This can be avoided by taking certain precautions. 
 

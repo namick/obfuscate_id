@@ -1,36 +1,38 @@
 class ScatterSwap
-  # ScatterSwap is an integer hash function designed to have:
-  # - zero collisions ( http://en.wikipedia.org/wiki/Perfect_hash_function )
-  # - achieve avalanche ( http://en.wikipedia.org/wiki/Avalanche_effect )
-  # - reversable
+  # This is the hashing function behind ObfuscateId.
+  # https://github.com/namick/obfuscate_id
   #
   # Designing a hash function is a bit of a black art and
   # being that I don't have math background, I must resort
   # to this simplistic swaping and scattering of array elements.
   #
-  # I welcome all improvments :-)
+  # After writing this and reading/learning some elemental hashing techniques,
+  # I realize this library is what is known as a Minimal perfect hash function:
+  # http://en.wikipedia.org/wiki/Perfect_hash_function#Minimal_perfect_hash_function
   #
-  # We are working with a limited sequential set of input integers.
-  # The largest value that a Mysql INT type is 2147483647
-  # which is the same as 2 to the power of 31 minus 1
+  # I welcome all improvements :-)
   #
-  # That gives us more than 2 Billion records.. if you need more than
-  # that, you might look for a different solution.
+  # If you have some comments or suggestions, please contact me on github
+  # https://github.com/namick
   #
-  # We will start by zero padding the integer and turning it into an array.
+  # - nathan amick
+  # 
   #
-  # The key to creating a reversable hash must be that somehow the information is preserved
-  # in the new number and the reverse hash can use that to reproduce the original number.
-  #
-  # One such piece of information could be the sum of digits
-  #
-  # This library basically works for integers that can be expressed with 10 digits:
+  # This library is built for integers that can be expressed with 10 digits:
   # It zero pads smaller numbers... so the number one is expressed with:
   # 0000000001
   # The biggest number it can deal with is:
   # 9999999999
   #
-  # Every number within the above range is mapped to another number in that range.
+  # Since we are working with a limited sequential set of input integers, 10 billion,
+  # this algorithm will suffice for simple id obfuscation for many web apps.
+  # The largest value that Ruby on Rails default id, Mysql INT type, is just over 2 billion (2147483647)
+  # which is the same as 2 to the power of 31 minus 1, but considerably less than 10 billion.
+  #
+  # ScatterSwap is an integer hash function designed to have:
+  # - zero collisions ( http://en.wikipedia.org/wiki/Perfect_hash_function )
+  # - achieve avalanche ( http://en.wikipedia.org/wiki/Avalanche_effect )
+  # - reversable
   #
   # We do that by combining two distinct strategies.
   #
@@ -46,11 +48,12 @@ class ScatterSwap
   # for each place in the 10 digit array; for this, we need a map so that we
   # can reverse it.
 
-  # obfuscates an integer up to 10 digits in length
+  # Convience class method pointing to the instance method
   def self.hash(plain_integer, spin = 0)
     new(plain_integer, spin).hash
   end
 
+  # Convience class method pointing to the instance method
   def self.reverse_hash(hashed_integer, spin = 0)
     new(hashed_integer, spin).reverse_hash
   end
@@ -64,12 +67,14 @@ class ScatterSwap
 
   attr_accessor :working_array
 
+  # obfuscates an integer up to 10 digits in length
   def hash
     swap
     scatter
     completed_string
   end
 
+  # de-obfuscates an integer
   def reverse_hash
     unscatter
     unswap
@@ -80,10 +85,6 @@ class ScatterSwap
     @working_array.join
   end
 
-  def completed_integer
-    completed_string.to_i
-  end
-
   # We want a unique map for each place in the original number
   def swapper_map(index)
     array = (0..9).to_a
@@ -92,20 +93,22 @@ class ScatterSwap
     end
   end
 
+  # Using a unique map for each of the ten places,
+  # we swap out one number for another
   def swap
     @working_array = @working_array.collect.with_index do |digit, index|
       swapper_map(index)[digit]
     end
   end
 
-
+  # Reverse swap
   def unswap
     @working_array = @working_array.collect.with_index do |digit, index|
       swapper_map(index).rindex(digit)
     end
   end
 
-  # rearrange the order of each digit in a reversable way by using the 
+  # Rearrange the order of each digit in a reversable way by using the 
   # sum of the digits (which doesn't change regardless of order)
   # as a key to record how they were scattered
   def scatter
@@ -115,6 +118,7 @@ class ScatterSwap
     end
   end
 
+  # Reverse the scatter
   def unscatter
     scattered_array = @working_array
     sum_of_digits = scattered_array.inject(:+).to_i
@@ -127,10 +131,8 @@ class ScatterSwap
     end
   end
 
-
+  # Add some spice so that different apps can have differently mapped hashes
   def spin
     @spin || 0
   end
-
-
 end

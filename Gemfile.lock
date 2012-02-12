@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    obfuscate_id (0.0.1.alpha)
+    obfuscate_id (0.0.1)
       rails (~> 3.2.1)
 
 GEM
