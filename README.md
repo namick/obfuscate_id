@@ -1,4 +1,4 @@
-# ObfuscateId [![Build Status](https://secure.travis-ci.org/namick/obfuscate_id.png)](http://travis-ci.org/namick/obfuscate_id.png)
+# ObfuscateId [![Build Status](https://secure.travis-ci.org/namick/obfuscate_id.png)](http://travis-ci.org/namick/obfuscate_id)
 
 ObfuscateId is a simple Ruby on Rails plugin that hides your seqential Active Record ids.  Although having nothing to do with security, it can be used to make database record id information non-obvious.
 
