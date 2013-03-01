@@ -44,7 +44,7 @@ module ObfuscateId
 
   module InstanceMethods
     def to_param
-      ObfuscateId.hide(self.id, self.class.obfuscate_id_spin)
+      ObfuscateId.hide(@actual_id || self.id, self.class.obfuscate_id_spin)
     end
 
     # Temporarily set the id to the parameterized version,
