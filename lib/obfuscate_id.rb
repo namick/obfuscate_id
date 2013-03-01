@@ -44,9 +44,21 @@ module ObfuscateId
 
   module InstanceMethods
     def to_param
-      ObfuscateId.hide(self.id, self.class.obfuscate_id_spin)
+      ObfuscateId.hide(@actual_id || self.id, self.class.obfuscate_id_spin)
     end
 
+    # Temporarily set the id to the parameterized version,
+    # as ActiveRecord::Persistence#reload uses self.id.
+    # This method should be backwards compatible if `reload`
+    # ever ends up using to_param.
+    def reload(options=nil)
+      @actual_id = self.id
+      self.id = to_param
+      super(options).tap do
+        self.id = @actual_id # restore & clean-up
+        @actual_id = nil
+      end
+    end
   end
 end
 
