@@ -23,6 +23,18 @@ describe "#obfuscate_id_spin" do
       p = Post.new(id: 1)
       u.to_param.should_not == p.to_param
     end
+    
+    it "can reload without throwing an error" do
+      u = User.new(id: 1)
+      lambda { u.reload }.should_not raise_error
+    end
+    
+    it "reloads correctly and id is reset to original value" do
+      u = User.new(id: 1)
+      u.reload
+      u.id.should_not == 1
+      u.to_param.should == 1
+    end
   end
 
   context "when not defined" do
