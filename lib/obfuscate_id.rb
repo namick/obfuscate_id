@@ -47,6 +47,15 @@ module ObfuscateId
       ObfuscateId.hide(self.id, self.class.obfuscate_id_spin)
     end
 
+    # Temporarily set the id to the parameterized version,
+    # as ActiveRecord::Persistence#reload uses self.id.
+    def reload(options=nil)
+      actual_id = self.id
+      self.id = to_param
+      super(options).tap do
+        self.id = actual_id
+      end
+    end
   end
 end
 
