@@ -9,9 +9,8 @@ Gem::Specification.new do |s|
   s.version     = ObfuscateId::VERSION
   s.authors     = ["Nathan Amick"]
   s.email       = ["github@nathanamick.com"]
-  s.homepage    = ""
-  s.summary     = "A simple Rails plugin that lightly masks seqential ActiveRecord ids"
-  s.description = "ObfuscateId is a simple Ruby on Rails plugin that hides your seqential Active Record ids.  Although having nothing to do with security, it can be used to make database record id information non-obvious."
+  s.summary     = "Mask ActiveRecord IDs"
+  s.description = "Make your ActiveRecord IDs non-obvious"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
