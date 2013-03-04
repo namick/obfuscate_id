@@ -3,6 +3,9 @@
 
 **Make your ActiveRecord ids non-obvious**
 
+![cat with sunglasses](http://i.imgur.com/kYOtUll.jpg)
+
+
 obfuscate_id turns a URL like this:
 
     http://example.com/users/3
