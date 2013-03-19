@@ -81,3 +81,32 @@ ActiveRecord reverses this obfuscated id back to the plain id before building th
 * This is not security.  obfuscate_id was created to lightly mask record id numbers for the casual user.  If you need to really secure your database ids (hint, you probably don't), you need to use real encryption like AES.
 * To properly generate obfuscated urls, make sure you trigger the model's `to_param` method by passing in the whole object rather than just the id; do this: `post_path(@post)` not this: `post_path(@post.id)`.
 
+## Development
+
+To run the tests, first clone the repo and run bundler:
+
+    git clone git@github.com:namick/obfuscate_id.git
+    cd obfuscate_id
+    bundle install
+
+Change to the dummy rails app and load the test database
+
+    cd spec/dummy
+    bundle exec rake db:test:load
+    cd -
+
+Run the tests
+
+    bundle exec rspec spec
+
+Or have Guard run them continuously
+
+    bundle exec guard
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
