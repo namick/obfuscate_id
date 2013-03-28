@@ -3,6 +3,7 @@ PATH
   specs:
     obfuscate_id (0.0.3)
       rails (~> 3.2.1)
+      scatter_swap (~> 0.0.2)
 
 GEM
   remote: http://rubygems.org/
@@ -125,6 +126,7 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    scatter_swap (0.0.2)
     selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)

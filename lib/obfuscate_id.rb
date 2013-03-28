@@ -1,7 +1,8 @@
 module ObfuscateId
 
   def obfuscate_id(options = {})
-    require 'obfuscate_id/scatter_swap'
+    require 'scatter_swap'
+
     extend ClassMethods 
     include InstanceMethods
     cattr_accessor :obfuscate_id_spin
