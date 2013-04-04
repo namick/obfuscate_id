@@ -12,22 +12,22 @@ describe "Models with and without ObfuscateId" do
   end
 
   describe "Post (using ObfuscateId)" do
-    it "should have plain id attibute" do
-      page.should have_content("post.id: 1")
+    it "has plain id attibute" do
+      expect(page).to have_content("post.id: 1")
     end
 
-    it "should have obfuscated id via url helpers" do
-      page.should_not have_content('post_path: /posts/1.')
+    it "has obfuscated id via url helpers" do
+      expect(page).to_not have_content('post_path: /posts/1.')
     end
   end
 
   describe "Comment (not using ObfuscateId)" do
-    it "should have plain id attribute" do
-      page.should have_content("comment.id: 1")
+    it "has plain id attribute" do
+      expect(page).to have_content("comment.id: 1")
     end
 
-    it "should have plain id via url helpers" do
-      page.should have_content('comment_path: /comments/1.')
+    it "has plain id via url helpers" do
+      expect(page).to have_content('comment_path: /comments/1.')
     end
   end
 

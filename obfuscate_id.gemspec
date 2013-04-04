@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["github@nathanamick.com"]
   s.summary     = "Mask ActiveRecord IDs"
   s.description = "Make your ActiveRecord IDs non-obvious"
+  s.homepage    = "https://github.com/namick/obfuscate_id"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 

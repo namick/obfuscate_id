@@ -13,15 +13,15 @@ describe "#obfuscate_id_spin" do
       end
     end
     
-    it "should return correct value" do
-      User.obfuscate_id_spin.should == 987654321
-      Post.obfuscate_id_spin.should == 123456789
+    it "reports correct value" do
+      expect(User.obfuscate_id_spin).to eql 987654321
+      expect(Post.obfuscate_id_spin).to eql 123456789
     end
 
     it "uses the spin given" do
       u = User.new(id: 1)
       p = Post.new(id: 1)
-      u.to_param.should_not == p.to_param
+      expect(u.to_param).to_not eql p.to_param
     end
   end
 
@@ -36,14 +36,14 @@ describe "#obfuscate_id_spin" do
       end
     end
 
-    it "should return a unique value computed from model name" do
-      User.obfuscate_id_spin.should_not == Post.obfuscate_id_spin
+    it "reports a unique value computed from model name" do
+      expect(User.obfuscate_id_spin).to_not eql Post.obfuscate_id_spin
     end
 
     it "uses computed spin" do
       u = User.new(id: 1)
       p = Post.new(id: 1)
-      u.to_param.should_not == p.to_param
+      expect(u.to_param).to_not eql p.to_param
     end
   end
 

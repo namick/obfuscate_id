@@ -4,22 +4,26 @@ describe "Reloading a record" do
   subject { Post.create content: "original" }
 
   it "does not throw an error" do
-    lambda { subject.reload }.should_not raise_error
+    expect(lambda { subject.reload }).to_not raise_error
   end
 
   it "reloads correctly" do
     post = Post.find(subject.to_param)
     post.update_attribute :content, "new"
-    subject.content.should == "original"
+
+    expect(subject.content).to eql "original"
+
     subject.reload
-    subject.content.should == "new"
+
+    expect(subject.content).to eql "new"
   end
 
   it "resets id to original value" do
     id = subject.id
     param = subject.to_param
     subject.reload
-    subject.id.should == id
-    subject.to_param.should == param
+
+    expect(subject.id).to eql id
+    expect(subject.to_param).to eql param
   end
 end
