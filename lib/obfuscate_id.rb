@@ -21,13 +21,21 @@ module ObfuscateId
   module ClassMethods
     def find(*args)
       if has_obfuscated_id?
-        args[0] = ObfuscateId.show(args[0], self.obfuscate_id_spin)
+        if args[0].is_a?(Array)
+          args[0].map! {|a| deobfuscate_id(a).to_i}
+        else
+          args[0] = deobfuscate_id(args[0])
+        end
       end
       super(*args)
     end
 
     def has_obfuscated_id?
       true
+    end
+
+    def deobfuscate_id(obfuscated_id)
+      ObfuscateId.show(obfuscated_id, self.obfuscate_id_spin)
     end
 
     # Generate a default spin from the Model name
@@ -56,6 +64,10 @@ module ObfuscateId
       super(options).tap do
         self.id = actual_id
       end
+    end
+
+    def deobfuscate_id(obfuscated_id)
+      self.class.deobfuscate_id(obfuscated_id)
     end
   end
 end
