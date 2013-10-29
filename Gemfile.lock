@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    obfuscate_id (0.0.3)
+    obfuscate_id (0.0.4)
       rails (= 3.2.15)
       scatter_swap (~> 0.0.3)
 
