@@ -20,14 +20,17 @@ module ObfuscateId
 
   module ClassMethods
     def find(*args)
-      if has_obfuscated_id?
-        if args[0].is_a?(Array)
-          args[0].map! {|a| deobfuscate_id(a).to_i}
+      scope = args.slice!(0)
+      options = args.slice!(0) || {}
+      if has_obfuscated_id? && !options[:no_obfuscated_id]
+        if scope.is_a?(Array)
+          scope.map! {|a| deobfuscate_id(a).to_i}
         else
-          args[0] = deobfuscate_id(args[0])
+          scope = deobfuscate_id(scope)
         end
       end
-      super(*args)
+      options.delete(:no_obfuscated_id)
+      super(scope, options)
     end
 
     def has_obfuscated_id?
@@ -56,14 +59,11 @@ module ObfuscateId
       ObfuscateId.hide(self.id, self.class.obfuscate_id_spin)
     end
 
-    # Temporarily set the id to the parameterized version,
-    # as ActiveRecord::Persistence#reload uses self.id.
-    def reload(options=nil)
-      actual_id = self.id
-      self.id = to_param
-      super(options).tap do
-        self.id = actual_id
-      end
+    # As ActiveRecord::Persistence#reload uses self.id
+    # reload without deobfuscating
+    def reload(options = nil)
+      options = (options || {}).merge(:no_obfuscated_id => true)
+      super(options)
     end
 
     def deobfuscate_id(obfuscated_id)
