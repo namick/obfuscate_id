@@ -49,7 +49,7 @@ module ObfuscateId
       number = name.split("").collect do |char|
         alphabet.index(char)
       end
-      number.join.to_i
+      number.shift(16).join.to_i
     end
 
   end
