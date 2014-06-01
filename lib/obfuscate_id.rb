@@ -29,8 +29,7 @@ module ObfuscateId
           scope = deobfuscate_id(scope)
         end
       end
-      options.delete(:no_obfuscated_id)
-      super(scope, options)
+      super(scope)
     end
 
     def has_obfuscated_id?
