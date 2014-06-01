@@ -45,6 +45,19 @@ describe "#obfuscate_id_spin" do
       p = Post.new(id: 1)
       expect(u.to_param).to_not eql p.to_param
     end
+
+    describe "for model with long name" do
+      before do
+        class ModelWithVeryLongName < ActiveRecord::Base
+          obfuscate_id
+        end
+      end
+        it 'compute default spin correctly' do
+          rec = ModelWithVeryLongName.new(id: 1)
+          expect(rec.to_param).to_not raise_error(/bignum too big/)
+        end
+    end
+
   end
 end
 
