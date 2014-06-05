@@ -48,12 +48,12 @@ describe "#obfuscate_id_spin" do
 
     describe "for model with long name" do
       before do
-        class ModelWithVeryLongName < ActiveRecord::Base
+        class SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOf < ActiveRecord::Base
           obfuscate_id
         end
       end
         it 'compute default spin correctly' do
-          rec = ModelWithVeryLongName.new(id: 1)
+          rec = SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOf.new(id: 1)
           expect(rec.to_param).to_not raise_error(/bignum too big/)
         end
     end

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20140219090804) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "model_with_very_long_names", :force => true do |t|
+  create_table "some_really_absurdly_long_named_class_that_you_wouldnt_have_thought_ofs", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
