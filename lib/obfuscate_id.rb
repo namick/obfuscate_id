@@ -48,7 +48,7 @@ module ObfuscateId
       number = name.split("").collect do |char|
         alphabet.index(char)
       end
-      number.shift(16).join.to_i
+      number.shift(12).join.to_i
     end
 
   end
