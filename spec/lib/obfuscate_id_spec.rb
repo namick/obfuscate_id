@@ -54,7 +54,7 @@ describe "#obfuscate_id_spin" do
       end
         it 'compute default spin correctly' do
           rec = SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOf.new(id: 1)
-          expect(rec.to_param).to_not raise_error(/bignum too big/)
+          expect { rec.to_param }.not_to raise_error
         end
     end
 

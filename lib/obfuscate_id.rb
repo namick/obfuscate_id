@@ -1,5 +1,4 @@
 module ObfuscateId
-
   def obfuscate_id(options = {})
     require 'scatter_swap'
 
@@ -19,6 +18,7 @@ module ObfuscateId
 
 
   module ClassMethods
+    @@no_obfuscated_id = false
     def find(*args)
       scope = args.slice!(0)
       options = args.slice!(0) || {}
