@@ -39,6 +39,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     capybara (2.4.4)
@@ -76,6 +77,8 @@ GEM
     hitimes (1.2.2)
     i18n (0.6.11)
     json (1.8.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (2.8.3)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -168,6 +171,7 @@ DEPENDENCIES
   capybara
   guard-rspec
   guard-spork
+  launchy
   obfuscate_id!
   pry
   rb-inotify

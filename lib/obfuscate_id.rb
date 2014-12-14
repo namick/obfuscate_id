@@ -18,7 +18,6 @@ module ObfuscateId
 
 
   module ClassMethods
-    @@no_obfuscated_id = false
     def find(*args)
       scope = args.slice!(0)
       options = args.slice!(0) || {}
@@ -60,9 +59,29 @@ module ObfuscateId
 
     # As ActiveRecord::Persistence#reload uses self.id
     # reload without deobfuscating
+    # def reload(options = nil)
+    #   options = (options || {}).merge(:no_obfuscated_id => true)
+    #   super(options)
+    # end
+
     def reload(options = nil)
       options = (options || {}).merge(:no_obfuscated_id => true)
-      super(options)
+      clear_aggregation_cache
+      clear_association_cache
+      fresh_object =
+        if options && options[:lock]
+          self.class.unscoped { self.class.lock(options[:lock]).find(id, options) }
+        else
+          self.class.unscoped { self.class.find(id, options) }
+        end
+
+      @attributes.update(fresh_object.instance_variable_get('@attributes'))
+
+      @column_types           = self.class.column_types
+      @column_types_override  = fresh_object.instance_variable_get('@column_types_override')
+      @attributes_cache       = {}
+      @new_record             = false
+      self
     end
 
     def deobfuscate_id(obfuscated_id)
