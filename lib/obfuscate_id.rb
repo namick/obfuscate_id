@@ -62,6 +62,7 @@ module ObfuscateId
     # reload without deobfuscating
     def reload(options = nil)
       options = (options || {}).merge(:no_obfuscated_id => true)
+      self.id = self.to_param
       super(options)
     end
 
