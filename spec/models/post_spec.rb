@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Post do
   describe "Reloading a record" do
-    subject { Post.create content: "original" }
+    subject(:post) { Post.create(content: "original") }
 
     it "does not throw an error" do
-      expect(lambda { subject.reload }).to_not raise_error
+      expect(lambda { post.reload }).to_not raise_error
     end
 
     it "reloads correctly" do
