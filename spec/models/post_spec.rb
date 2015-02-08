@@ -33,6 +33,7 @@ describe Post do
     let (:post1) { Post.create content: "one" }
     let (:post2) { Post.create content: "two" }
     subject {Post.find([post1.to_param, post2.to_param])}
+
     it "should load all items" do
       should eq([post1, post2])
     end

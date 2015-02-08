@@ -30,6 +30,4 @@ describe "Models with and without ObfuscateId" do
       expect(page).to have_content('comment_path: /comments/1.')
     end
   end
-
 end
-
