@@ -1,5 +1,4 @@
-Dummy::Application.routes.draw do
+Rails.application.routes.draw do
   resources :comments
-
-  resources :posts 
+  resources :posts
 end
