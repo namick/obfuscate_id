@@ -1,5 +1,4 @@
 language: ruby
 rvm:
   - 1.9.3
-before_script:
-  - cd spec/dummy && bundle exec rake db:test:load && cd -
+  - 2.1.1

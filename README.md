@@ -13,7 +13,7 @@ obfuscate_id turns a URL like this:
 into something like:
 
     http://example.com/users/2356513904
-    
+
 Sequential ActiveRecord ids become non-sequential, random looking, numeric ids.
 
     # post 7000
@@ -22,7 +22,7 @@ Sequential ActiveRecord ids become non-sequential, random looking, numeric ids.
     http://example.com/posts/7107163820
     # post 7002
     http://example.com/posts/3296163828
-       
+
 ## Why would you want this?
 
 If your site is scaling well, you might not want to leak that you are getting 50 new posts a minute.
@@ -52,7 +52,7 @@ Run bundler.
 
 ## Usage
 
-In your model, add a single line.  
+In your model, add a single line.
 
     class Post < ActiveRecord::Base
       obfuscate_id
@@ -81,6 +81,12 @@ ActiveRecord reverses this obfuscated id back to the plain id before building th
 * This is not security.  obfuscate_id was created to lightly mask record id numbers for the casual user.  If you need to really secure your database ids (hint, you probably don't), you need to use real encryption like AES.
 * To properly generate obfuscated urls, make sure you trigger the model's `to_param` method by passing in the whole object rather than just the id; do this: `post_path(@post)` not this: `post_path(@post.id)`.
 
+## Versions
+
+This is tested with Rails 4.2.0.  For other versions of Rails, please see [the releases](https://github.com/namick/obfuscate_id/releases).
+
+If you are trying to get it to work with a different version of rails that is not tested, let me know in [the issues](https://github.com/namick/obfuscate_id/issues)
+
 ## Development
 
 To run the tests, first clone the repo and run bundler:
@@ -88,12 +94,6 @@ To run the tests, first clone the repo and run bundler:
     git clone git@github.com:namick/obfuscate_id.git
     cd obfuscate_id
     bundle install
-
-Change to the dummy rails app and load the test database
-
-    cd spec/dummy
-    bundle exec rake db:test:load
-    cd -
 
 Run the tests
 
