@@ -33,7 +33,7 @@ Every website has a third user, but that third user doesn't have to know he is t
 
 ## Features
 
-* Extreemly simple. A single line of code in the model turns it on.
+* Extremely simple. A single line of code in the model turns it on.
 * Transforms normal seqential ids into random-looking ten digit numerical strings.
 * Gently masks resource ids while retaining a cleaner look than using an encrypted hash.
 * No database changes or migrations are needed.  The record is still stored in the database with its original id.
