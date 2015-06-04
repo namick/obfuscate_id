@@ -30,8 +30,8 @@ describe "Models with and without ObfuscateId" do
     it "has plain id attibute" do
       should have_content("post: First Post")
       should have_content("post.id: 1")
-      should have_content("post.to_param: 0587646369")
-      should have_content('post_path: /posts/0587646369.')
+      should have_content("post.to_param: r7")
+      should have_content('post_path: /posts/r7.')
     end
   end
 
@@ -69,15 +69,15 @@ describe "Models with and without ObfuscateId" do
     it "Post is updated and has obfuscated_id" do
       should have_content("post: Updated first post")
       should have_content("post.id: 1")
-      should have_content("post.to_param: 0587646369")
-      should have_content("post_path: /posts/0587646369")
+      should have_content("post.to_param: r7")
+      should have_content("post_path: /posts/r7")
     end
 
     it "Comment is updated and has obfuscated_id" do
       should have_content("comment: Updated first comment")
       should have_content("comment.id: 1")
-      should have_content("comment.to_param: 2985164038")
-      should have_content("comment_path: /comments/2985164038")
+      should have_content("comment.to_param: yl")
+      should have_content("comment_path: /comments/yl")
     end
   end
 end

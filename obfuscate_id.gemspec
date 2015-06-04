@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "scatter_swap",    "~> 0.0.3"
   s.add_dependency "rails",           "~> 4.2.0"
+  s.add_dependency "hashids",         "~> 1.0.2"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
