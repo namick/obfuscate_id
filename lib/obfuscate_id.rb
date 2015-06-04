@@ -1,6 +1,6 @@
 module ObfuscateId
   def obfuscate_id(options = {})
-    require 'Hashids'
+    require 'hashids'
 
     extend ClassMethods
     include InstanceMethods
