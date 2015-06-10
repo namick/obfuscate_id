@@ -27,6 +27,12 @@ describe Post do
       expect(subject.id).to eql id
       expect(subject.to_param).to eql param
     end
+
+    context "while locking" do
+      it "does not throw an error" do
+        expect(lambda { subject.lock! }).to_not raise_error
+      end
+    end
   end
 
   describe "Finding multiple records" do
