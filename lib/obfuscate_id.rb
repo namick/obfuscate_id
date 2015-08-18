@@ -35,7 +35,7 @@ module ObfuscateId
     end
 
     def deobfuscate_id(obfuscated_id)
-      ObfuscateId.show(obfuscated_id, self.obfuscate_id_spin)
+      ObfuscateId.show(obfuscated_id, self.obfuscate_id_spin).to_i
     end
 
     # Generate a default spin from the Model name
@@ -77,7 +77,7 @@ module ObfuscateId
     end
 
     def deobfuscate_id(obfuscated_id)
-      self.class.deobfuscate_id(obfuscated_id)
+      self.class.deobfuscate_id(obfuscated_id).to_i
     end
   end
 end

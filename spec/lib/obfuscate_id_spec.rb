@@ -76,7 +76,7 @@ describe ObfuscateId do
 
     let(:user) { User.create(id: 1) }
 
-    subject(:deobfuscated_id) { User.deobfuscate_id(user.to_param).to_i }
+    subject(:deobfuscated_id) { User.deobfuscate_id(user.to_param) }
 
     it "reverses the obfuscated id" do
       should eq(user.id)
