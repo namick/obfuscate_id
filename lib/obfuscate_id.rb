@@ -83,3 +83,18 @@ module ObfuscateId
 end
 
 ActiveRecord::Base.extend ObfuscateId
+
+
+module ActiveRecord
+  module Associations
+    class CollectionProxy < Relation
+      def find(*args, no_obfuscated_id: false, &block)
+        target = @association.klass
+        if target.has_obfuscated_id? && !no_obfuscated_id
+          args.map! { |id| target.deobfuscate_id(id) }
+        end
+        @association.find(*args, &block)
+      end
+    end
+  end
+end
