@@ -27,7 +27,7 @@ module ObfuscateId
           scope = deobfuscate_id(scope)
         end
       end
-      super(scope)
+      super(scope, no_obfuscated_id: true)
     end
 
     def has_obfuscated_id?
@@ -83,3 +83,17 @@ module ObfuscateId
 end
 
 ActiveRecord::Base.extend ObfuscateId
+
+
+module ActiveRecord
+  module FinderMethods
+    def find(*args, no_obfuscated_id: false)
+      return super if block_given?
+      target = klass
+      if target.has_obfuscated_id? && !no_obfuscated_id
+        args.map! { |id| target.deobfuscate_id(id) }
+      end
+      find_with_ids(*args)
+    end
+  end
+end

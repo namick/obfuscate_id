@@ -1,3 +1,4 @@
+/.versions.conf
 .bundle/
 log/*.log
 pkg/
