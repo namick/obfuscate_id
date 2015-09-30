@@ -27,7 +27,7 @@ module ObfuscateId
           scope = deobfuscate_id(scope)
         end
       end
-      super(scope)
+      super(scope, no_obfuscated_id: true)
     end
 
     def has_obfuscated_id?
@@ -86,15 +86,14 @@ ActiveRecord::Base.extend ObfuscateId
 
 
 module ActiveRecord
-  module Associations
-    class CollectionProxy < Relation
-      def find(*args, no_obfuscated_id: false, &block)
-        target = @association.klass
-        if target.has_obfuscated_id? && !no_obfuscated_id
-          args.map! { |id| target.deobfuscate_id(id) }
-        end
-        @association.find(*args, &block)
+  module FinderMethods
+    def find(*args, no_obfuscated_id: false)
+      return super if block_given?
+      target = klass
+      if target.has_obfuscated_id? && !no_obfuscated_id
+        args.map! { |id| target.deobfuscate_id(id) }
       end
+      find_with_ids(*args)
     end
   end
 end

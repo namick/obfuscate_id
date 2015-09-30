@@ -49,6 +49,7 @@ describe "Models with and without ObfuscateId" do
       class Post < ActiveRecord::Base
         has_many :comments
         obfuscate_id spin: 123456789
+        scope :with_id, -> { where('id is not null') }
       end
 
       class Comment < ActiveRecord::Base
@@ -84,6 +85,10 @@ describe "Models with and without ObfuscateId" do
       comment = Post.find('0587646369').
         comments.find('2985164038')
       expect(comment).to be_a(Comment)
+    end
+
+    it "Post can be found if scoped" do
+      expect(Post.with_id.find('0587646369')).to be_a(Post)
     end
   end
 end
