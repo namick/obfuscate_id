@@ -80,6 +80,13 @@ ActiveRecord reverses this obfuscated id back to the plain id before building th
 
 * This is not security.  obfuscate_id was created to lightly mask record id numbers for the casual user.  If you need to really secure your database ids (hint, you probably don't), you need to use real encryption like AES.
 * To properly generate obfuscated urls, make sure you trigger the model's `to_param` method by passing in the whole object rather than just the id; do this: `post_path(@post)` not this: `post_path(@post.id)`.
+* To use with Rails 4.2 ActiveJob features such as ActionMailer's `deliver_later`, update how GlobalId deserializes ActiveRecord instances:
+```
+# config/initializer/global_id.rb
+GlobalID::Locator.use Rails.application.railtie_name.remove("_application").dasherize do |gid|
+  gid.model_class.find_by_id gid.model_id
+end
+```
 
 ## Versions
 
