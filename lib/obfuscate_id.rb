@@ -66,7 +66,7 @@ module ObfuscateId
 
       fresh_object =
         if options && options[:lock]
-          self.class.unscoped { self.class.lock(options[:lock]).find(id, options) }
+          self.class.unscoped { self.class.lock(options[:lock]).find(id) }
         else
           self.class.unscoped { self.class.find(id, options) }
         end
