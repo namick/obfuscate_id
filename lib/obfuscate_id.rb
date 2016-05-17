@@ -53,7 +53,7 @@ module ObfuscateId
 
   module InstanceMethods
     def to_param
-      ObfuscateId.hide(self.id, self.class.obfuscate_id_spin)
+      ObfuscateId.hide(self.id, self.class.obfuscate_id_spin) if self.id
     end
 
     # Override ActiveRecord::Persistence#reload

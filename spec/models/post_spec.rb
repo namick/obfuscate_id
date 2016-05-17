@@ -38,4 +38,12 @@ describe Post do
       should eq([post1, post2])
     end
   end
+
+  context 'When not persisted yet' do
+    let (:new_post) { Post.new content: "one" }
+
+    it 'has no param' do
+      expect(new_post.to_param).to be_nil
+    end
+  end
 end
