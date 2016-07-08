@@ -1,0 +1,7 @@
+Posts
+
+<ul>
+  <% @posts.each do |post| %>
+    <li><%= link_to post.content, post %></li>
+  <% end %>
+</ul>
