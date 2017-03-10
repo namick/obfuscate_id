@@ -38,6 +38,7 @@ module ObfuscateId
     def deobfuscated_id(obfuscated_id)
       self.obfuscater.reverse_hash(obfuscated_id)
     end
+    alias_method :deobfuscate_id, :deobfuscated_id
 
     def obfuscated_id(plain_id)
       self.obfuscater.hash(plain_id)
@@ -81,9 +82,10 @@ module ObfuscateId
       self
     end
 
-    def deobfuscate_id(obfuscated_id)
-      self.class.deobfuscate_id(obfuscated_id)
+    def deobfuscated_id(obfuscated_id)
+      self.class.deobfuscated_id(obfuscated_id)
     end
+    alias_method :deobfuscate_id, :deobfuscated_id
   end
 end
 
