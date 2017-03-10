@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/TiempoLabs/scatter_swap.git
-  revision: de0d114c1bf29fd669fc58d68354e42ea339bd59
-  branch: feature/lazy_loaded_spinner_map
+  revision: c73c7e39391df13158815c4537083787f70298fd
   specs:
     scatter_swap (0.0.2)
 
@@ -199,3 +198,6 @@ DEPENDENCIES
   rspec-rails
   scatter_swap!
   sqlite3
+
+BUNDLED WITH
+   1.14.3

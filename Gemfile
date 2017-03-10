@@ -12,4 +12,4 @@ gemspec
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-gem 'scatter_swap', git: 'https://github.com/TiempoLabs/scatter_swap.git', branch: 'feature/lazy_loaded_spinner_map'
+gem 'scatter_swap', git: 'https://github.com/TiempoLabs/scatter_swap.git'
