@@ -1,9 +1,16 @@
+GIT
+  remote: https://github.com/TiempoLabs/scatter_swap.git
+  revision: de0d114c1bf29fd669fc58d68354e42ea339bd59
+  branch: feature/lazy_loaded_spinner_map
+  specs:
+    scatter_swap (0.0.2)
+
 PATH
   remote: .
   specs:
     obfuscate_id (0.2.0)
       rails (~> 4.2.0)
-      scatter_swap (~> 0.0.3)
+      scatter_swap
 
 GEM
   remote: http://rubygems.org/
@@ -156,7 +163,6 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
-    scatter_swap (0.0.3)
     slop (3.6.0)
     spork (0.9.2)
     sprockets (2.12.3)
@@ -191,4 +197,5 @@ DEPENDENCIES
   pry
   rb-inotify
   rspec-rails
+  scatter_swap!
   sqlite3
