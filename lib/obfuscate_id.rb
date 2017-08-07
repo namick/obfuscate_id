@@ -4,19 +4,25 @@ module ObfuscateId
 
     extend ClassMethods
     include InstanceMethods
-    cattr_accessor :obfuscate_id_spin
+    cattr_accessor :obfuscate_id_spin, :clean_url_class_name
     self.obfuscate_id_spin = (options[:spin] || obfuscate_id_default_spin)
+    set_clean_url_class_name
   end
 
-  def self.hide(id, spin)
-    ScatterSwap.hash(id, spin)
+  def self.hide(id,name, spin)
+    name + ScatterSwap.hash(id, spin)
   end
 
-  def self.show(id, spin)
-    ScatterSwap.reverse_hash(id, spin)
+  def self.show(id,name, spin)
+    ScatterSwap.reverse_hash(id.gsub(name, ""), spin)
   end
 
   module ClassMethods
+
+    def set_clean_url_class_name
+      self.clean_url_class_name = self.name.gsub("::", "-").underscore
+    end
+
     def find(*args)
       scope = args.slice!(0)
       options = args.slice!(0) || {}
@@ -35,7 +41,7 @@ module ObfuscateId
     end
 
     def deobfuscate_id(obfuscated_id)
-      ObfuscateId.show(obfuscated_id, self.obfuscate_id_spin)
+      ObfuscateId.show(obfuscated_id, self.clean_url_class_name, self.obfuscate_id_spin)
     end
 
     # Generate a default spin from the Model name
@@ -53,7 +59,7 @@ module ObfuscateId
 
   module InstanceMethods
     def to_param
-      ObfuscateId.hide(self.id, self.class.obfuscate_id_spin)
+      ObfuscateId.hide(self.id, self.clean_url_class_name, self.class.obfuscate_id_spin)
     end
 
     # Override ActiveRecord::Persistence#reload

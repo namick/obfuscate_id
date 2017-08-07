@@ -83,7 +83,7 @@ ActiveRecord reverses this obfuscated id back to the plain id before building th
 
 ## Versions
 
-This is tested with Rails 4.2.0.  For other versions of Rails, please see [the releases](https://github.com/namick/obfuscate_id/releases).
+This is tested with Rails 5.1.2.  For other versions of Rails, please see [the releases](https://github.com/namick/obfuscate_id/releases).
 
 If you are trying to get it to work with a different version of rails that is not tested, let me know in [the issues](https://github.com/namick/obfuscate_id/issues)
 

@@ -47,7 +47,7 @@ describe ObfuscateId do
 
       describe "for model with long name" do
         before do
-          class SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOf < ActiveRecord::Base
+          class SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOfs < ActiveRecord::Base
             def self.columns() @columns ||= []; end
 
             def self.column(name, sql_type = nil, default = nil, null = true)
@@ -59,7 +59,7 @@ describe ObfuscateId do
         end
 
         it 'compute default spin correctly' do
-          rec = SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOf.new(id: 1)
+          rec = SomeReallyAbsurdlyLongNamedClassThatYouWouldntHaveThoughtOfs.new(id: 1)
           expect { rec.to_param }.not_to raise_error
         end
       end
