@@ -1,4 +1,4 @@
-# A fork from obfuscate_id to suppport rails versions later than rails 5
+# A fork from    obfuscate_id gem    to support rails versions later than rails 5
 
 **Make your ActiveRecord ids non-obvious**
 
