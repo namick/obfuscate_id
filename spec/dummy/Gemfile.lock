@@ -1,5 +1,6 @@
-PATH
-  remote: /home/btaha/optomatica/dev_gems/obfuscate_id
+GIT
+  remote: https://github.com/socertis/obfuscate_id.git
+  revision: 86f4f075b62f9599f4f34b8575f1c0a084800429
   specs:
     obfuscate_id (0.2.1)
       rails
