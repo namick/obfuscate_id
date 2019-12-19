@@ -1,9 +1,6 @@
-# obfuscate_id
-[![Build Status](https://secure.travis-ci.org/namick/obfuscate_id.png)](http://travis-ci.org/namick/obfuscate_id) [![Dependency Status](https://gemnasium.com/namick/obfuscate_id.png)](https://gemnasium.com/namick/obfuscate_id) [![Code Climate](https://codeclimate.com/github/namick/obfuscate_id.png)](https://codeclimate.com/github/namick/obfuscate_id)
+# A fork from    obfuscate_id gem    to support rails versions later than rails 5
 
 **Make your ActiveRecord ids non-obvious**
-
-![cat with sunglasses](http://i.imgur.com/kYOtUll.jpg)
 
 
 obfuscate_id turns a URL like this:
@@ -83,30 +80,4 @@ ActiveRecord reverses this obfuscated id back to the plain id before building th
 
 ## Versions
 
-This is tested with Rails 4.2.0.  For other versions of Rails, please see [the releases](https://github.com/namick/obfuscate_id/releases).
-
-If you are trying to get it to work with a different version of rails that is not tested, let me know in [the issues](https://github.com/namick/obfuscate_id/issues)
-
-## Development
-
-To run the tests, first clone the repo and run bundler:
-
-    git clone git@github.com:namick/obfuscate_id.git
-    cd obfuscate_id
-    bundle install
-
-Run the tests
-
-    bundle exec rspec spec
-
-Or have Guard run them continuously
-
-    bundle exec guard
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+This is tested with Rails 5.2.3.
