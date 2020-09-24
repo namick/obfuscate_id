@@ -65,11 +65,11 @@ module ObfuscateId
       clear_association_cache
 
       fresh_object =
-        if options && options[:lock]
-          self.class.unscoped { self.class.lock(options[:lock]).find(id, options) }
-        else
-          self.class.unscoped { self.class.find(id, options) }
-        end
+      if options && options[:lock]
+        self.class.unscoped { self.class.lock(options[:lock]).find(id) }
+      else
+        self.class.unscoped { self.class.find(id, options) }
+      end
 
       @attributes = fresh_object.instance_variable_get('@attributes')
       @new_record = false
