@@ -81,7 +81,7 @@ GEM
     obfuscate_id (0.2.0)
       rails (~> 4.2.0)
       scatter_swap (~> 0.0.3)
-    rack (1.6.0)
+    rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
